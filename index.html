@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rock Paper Scissors</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Rubik+Burned&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./output.css" />
+    </head>
+    <body class="h-screen select-none p-1 text-white">
+        <div
+            class="fixed left-0 top-0 z-10 h-screen w-screen backdrop-blur-sm"
+            id="block-screen"
+        >
+            <h1
+                class="get absolute left-[calc(50%-100px)] top-[calc(50%-50px)] flex h-[100px] w-[200px] items-center justify-center text-3xl font-bold"
+            ></h1>
+            <h1
+                class="ready absolute left-[calc(50%-100px)] top-[calc(50%-50px)] flex h-[100px] w-[200px] items-center justify-center text-3xl font-bold"
+            ></h1>
+            <h1
+                class="play absolute left-[calc(50%-100px)] top-[calc(50%-50px)] flex h-[100px] w-[200px] items-center justify-center text-3xl font-bold"
+            ></h1>
+            <p
+                class="message flex h-[150px] w-[250px] items-center justify-center rounded-[20px] border-2 border-black text-2xl font-bold text-black"
+                id="round-message"
+            ></p>
+            <div
+                class="absolute left-[calc(50%-300px)] top-[calc(50%-250px)] z-30 hidden h-[500px] w-[600px] flex-col items-center justify-center rounded-2xl border-4 border-black"
+                id="play-again-container"
+            >
+                <h2
+                    class="animate-pulse text-5xl font-semibold text-slate-100"
+                    id="final-result"
+                ></h2>
+                <div class="mt-2 flex gap-8">
+                    <h3 class="text-xl font-semibold">My Score:</h3>
+                    <h3 class="text-xl font-semibold">Your Score:</h3>
+                </div>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    class="sduration-500 mt-2 h-[50px] w-[50px] cursor-pointer transition duration-500 hover:rotate-[360deg] active:scale-90"
+                    id="play-again-btn"
+                >
+                    <path
+                        d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"
+                    />
+                </svg>
+                <canvas id="fallingLeavesCanvas"></canvas>
+            </div>
+        </div>
+        <header class="h-1/5 py-3 text-center">
+            <h1 class="text-6xl font-bold tracking-wider drop-shadow-xl">
+                ROCK PAPER SCISSORS
+            </h1>
+            <p
+                class="mt-1 text-2xl font-semibold tracking-wide text-slate-200 drop-shadow-xl"
+            >
+                First one to score 5 wins the game !!!
+            </p>
+        </header>
+        <main class="flex h-4/5 justify-between text-center">
+            <section class="w-1/2 border-r-2 border-dashed">
+                <h2 class="text-3xl font-semibold text-zinc-900">COMPUTER</h2>
+                <p
+                    class="mx-auto mt-2 flex h-12 w-28 items-center justify-center rounded-md border-2 border-teal-500 bg-slate-900 text-2xl text-teal-500"
+                >
+                    score: <span id="computer-score">0</span>
+                </p>
+                <div
+                    class="img-container mt-32 flex justify-center"
+                    id="computer-hands-container"
+                >
+                    <img
+                        class="-mr-4 h-[200px]"
+                        src="Assets/rock.png"
+                        alt="rock image"
+                        id="rock"
+                    />
+                    <img
+                        class="-mr-4 h-[200px]"
+                        src="Assets/paper.png"
+                        alt="paper image"
+                        id="paper"
+                    />
+                    <img
+                        class="h-[200px]"
+                        src="Assets/scissor.png"
+                        alt="scissors image"
+                        id="scissors"
+                    />
+                </div>
+                <h3 class="waiting mx-6 mt-4 text-2xl"></h3>
+            </section>
+            <section class="w-1/2">
+                <h2 class="text-3xl font-semibold text-zinc-900">YOU</h2>
+                <p
+                    class="mx-auto mt-2 flex h-12 w-28 items-center justify-center rounded-md border-2 border-teal-500 bg-slate-900 text-2xl text-teal-500"
+                >
+                    score: <span id="user-score">0</span>
+                </p>
+                <div
+                    class="img-container mt-32 flex justify-center"
+                    id="user-hands-container"
+                >
+                    <img
+                        class="-mr-4 h-[200px]"
+                        src="Assets/rock.png"
+                        alt="rock image"
+                        id="rock"
+                    />
+                    <img
+                        class="-mr-4 h-[200px]"
+                        src="Assets/paper.png"
+                        alt="paper image"
+                        id="paper"
+                    />
+                    <img
+                        class="h-[200px]"
+                        src="Assets/scissor.png"
+                        alt="scissors image"
+                        id="scissors"
+                    />
+                </div>
+                <div class="mx-6 mt-2 flex items-center font-semibold">
+                    <p class="text-xl">Choose:</p>
+                    <div
+                        class="ml-12 flex flex-grow gap-6"
+                        id="user-btn-container"
+                    >
+                        <button
+                            class="rounded-3xl border-2 border-zinc-200 bg-stone-700 px-4 py-2 text-zinc-200 transition hover:scale-[1.2] hover:border-stone-700 hover:bg-zinc-200 hover:text-stone-700"
+                            id="rock-user"
+                        >
+                            ROCK
+                        </button>
+                        <button
+                            class="rounded-3xl border-2 border-zinc-200 bg-stone-700 px-4 py-2 text-zinc-200 transition hover:scale-[1.2] hover:border-stone-700 hover:bg-zinc-200 hover:text-stone-700"
+                            id="paper-user"
+                        >
+                            PAPER
+                        </button>
+                        <button
+                            class="rounded-3xl border-2 border-zinc-200 bg-stone-700 px-4 py-2 text-zinc-200 transition hover:scale-[1.2] hover:border-stone-700 hover:bg-zinc-200 hover:text-stone-700"
+                            id="scissors-user"
+                        >
+                            SCISSORS
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script src="./script.js" type="module"></script>
+        <script src="./confetti.js" type="module"></script>
+    </body>
+</html>

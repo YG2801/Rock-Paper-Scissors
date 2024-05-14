@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(90deg, #1d4350, #a43931);
+}
+
+header h1 {
+    font-family: "Rubik Burned", system-ui;
+    background: -webkit-linear-gradient(0deg, rgb(0, 255, 217), rgb(216, 49, 211));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.img-container img:nth-child(1) {
+    animation: moveUpDown 0.7s ease-in-out infinite;
+}
+.img-container img:nth-child(2) {
+    animation: moveUpDown 0.7s ease-in-out infinite 0.2s;
+}
+.img-container img:nth-child(3) {
+    animation: moveUpDown 0.7s ease-in-out infinite 0.4s;
+}
+
+@keyframes moveUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-60px);
+    }
+}
+
+.waiting::before {
+    content: "";
+    animation: waiting 1s linear infinite;
+}
+
+@keyframes waiting {
+    0%,
+    100% {
+        content: "Waiting for you";
+    }
+    25% {
+        content: "Waiting for you.";
+    }
+    50% {
+        content: "Waiting for you..";
+    }
+    75% {
+        content: "Waiting for you...";
+    }
+}
+
+.message {
+    z-index: 10;
+    position: fixed;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    top: calc(50% - 75px);
+    left: -250px;
+    background-image: url("./Assets/car.jpg");
+    background-size: cover;
+    background-position: right;
+}
+
+@keyframes msgAnimation {
+    0% {
+        left: -250px;
+    }
+    20% {
+        left: calc(50%);
+        transform: skew(-10deg);
+    }
+    30% {
+        left: calc(50% - 125px);
+    }
+    80% {
+        left: calc(50% - 125px);
+        transform: rotate(-10deg);
+    }
+    100% {
+        left: 100%;
+        transform: rotate(-10deg);
+    }
+}
+
+.get::before {
+    content: "";
+    animation: get 1s linear 1;
+}
+
+.ready::before {
+    content: "";
+    animation: ready 1s linear 1 1s;
+}
+
+.play::before {
+    content: "";
+    animation: play 1s linear 1 2s;
+}
+
+@keyframes get {
+    0% {
+        content: "GET";
+        transform: scale(5);
+    }
+    100% {
+        content: "";
+        transform: scale(1);
+    }
+}
+
+@keyframes ready {
+    0% {
+        content: "READY";
+        transform: scale(5);
+    }
+    100% {
+        content: "";
+        transform: scale(1);
+    }
+}
+
+@keyframes play {
+    0% {
+        content: "TO PLAY";
+        transform: scale(5);
+    }
+    100% {
+        content: "";
+        transform: scale(1);
+    }
+}
+
+#play-again-container {
+    background: rgb(173, 115, 26);
+    background: linear-gradient(
+        180deg,
+        rgba(173, 115, 26, 1) 0%,
+        rgba(225, 150, 36, 1) 38%,
+        rgba(255, 192, 97, 1) 80%
+    );
+    box-shadow: 0 0 40px 5px rgba(252, 252, 252, 0.611);
+}
+
+#final-result {
+    text-shadow: 0 0 5px rgba(29, 13, 13, 0.611);
+}
+
+canvas {
+    margin: 0;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+}
